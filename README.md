@@ -59,7 +59,6 @@ To place an order, the customer must be registered, he must validate his registr
 
 - To avoid XSS attacks, try to use attribute validations at the back end + regular expressions) Create the Class Diagram related to the creation of the MarketPlace Propose an adequate project management scheme with a tool like Jira or Trello...
 
-Send an email (myoussefsbai@simplon.co) of the report of your brief with the explanations on the blocking points of the brief and the adopted solutions
 ```
 ## Learning methods
 ```
@@ -68,9 +67,8 @@ Deadline 24/03/2022
 ```
 
 ## Teams
-```
+
 @yassineelhoubi
 @YounessHassoune
 @hicham-elkamouni
 @RAFIKENEFIDA
-```
