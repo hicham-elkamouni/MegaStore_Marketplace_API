@@ -67,8 +67,9 @@ Deadline 24/03/2022
 ```
 
 ## Teams
+```
+- [@Yassine ELHOUBI](https://github.com/yassineelhoubi)
+- [@Youness HASSOUNE](https://github.com/YounessHassoune)
+- [@Rafik ENEFIDA](https://github.com/RAFIKENEFIDA)
+- [@Hicham ELKAMOUNI](https://github.com/hicham-elkamouni)
 
-@yassineelhoubi
-@YounessHassoune
-@hicham-elkamouni
-@RAFIKENEFIDA
