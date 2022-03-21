@@ -6,12 +6,31 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 @Schema({ timestamps: true })
 export class User {
   @Field(() => String)
-  @Prop()
-  name: string;
+  _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
   @Prop()
-  age: string;
+  email: string;
+
+  @Field(() => String)
+  @Prop()
+  hash: string;
+
+  @Field(() => String)
+  @Prop()
+  phone: string;
+
+  @Field(() => String)
+  @Prop()
+  address: string;
+
+  @Field(() => String)
+  @Prop()
+  city: string;
+
+  @Field(() => String)
+  @Prop()
+  country: string;
 }
 
 export type UserDocument = User & Document;

@@ -2,11 +2,30 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Auth {
+  userId: String!
+  token: String!
+}
+
 type User {
-  name: String!
-  age: String!
+  _id: String!
+  email: String!
+  hash: String!
+  phone: String!
+  address: String!
+  city: String!
+  country: String!
 }
 
 type Query {
-  user: User!
+  getAll: User!
+}
+
+type Mutation {
+  signIn(signinInput: signinInput!): Auth!
+}
+
+input signinInput {
+  email: String!
+  password: String!
 }
