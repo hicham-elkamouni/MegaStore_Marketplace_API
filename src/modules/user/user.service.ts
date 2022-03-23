@@ -37,8 +37,13 @@ export class UserService {
 
       // create an access and a refresh token
       const [access_token, refresh_token] = await Promise.all([
-        this.authService.createToken(user._id, ['customer'], '15m'),
-        this.authService.createToken(user._id, ['customer'], '7d'),
+        this.authService.createToken(
+          user._id,
+          ['customer', 'admin'],
+          '15m',
+          'access',
+        ),
+        this.authService.createToken(user._id, ['customer'], '7d', 'refresh'),
       ]);
 
       // register the refresh token in the DB

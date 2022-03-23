@@ -35,6 +35,22 @@ export class User {
   @Field(() => String)
   @Prop()
   country: string;
+
+  @Field(() => String)
+  @Prop()
+  document: string;
+
+  @Field(() => [String])
+  @Prop()
+  permissions: string[];
+
+  @Field()
+  @Prop()
+  cart: string;
+
+  @Field()
+  @Prop()
+  store: string;
 }
 
 export type UserDocument = User & Document;
