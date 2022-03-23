@@ -1,9 +1,10 @@
 import { Req, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
-import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
+import { Roles } from '../auth/decorators/role.decorator';
+import { Allowed } from '../auth/guards/Allowed.guard';
 import { JwtGuard } from '../auth/guards/JwtGuard.guard';
-
+import { RolesGuard } from '../auth/guards/RolesGuard.guard';
 import { signinInput } from './dto';
 import { Auth } from './model/auth.model';
 import { User } from './model/user.model';
@@ -23,7 +24,7 @@ export class userResolver {
     return this.userService.signIn(signinInput);
   }
 
-  @UseGuards(JwtGuard)
+  @Allowed(['admin', 'asd'])
   @Mutation(() => Auth)
   async logOut(@Context('req') req: any): Promise<User> {
     const userId = req.user?.userId;

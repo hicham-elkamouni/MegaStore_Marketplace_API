@@ -1,4 +1,4 @@
 export type jwtPayload = {
   userId: string;
-  permissions: [string];
+  permissions: string[];
 };

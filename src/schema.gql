@@ -16,6 +16,10 @@ type User {
   address: String!
   city: String!
   country: String!
+  document: String!
+  permissions: [String!]!
+  cart: String!
+  store: String!
 }
 
 type Query {
