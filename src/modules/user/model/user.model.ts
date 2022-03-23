@@ -16,6 +16,10 @@ export class User {
   @Prop()
   hash: string;
 
+  @Field(() => String, { nullable: true })
+  @Prop()
+  hashRerf?: string;
+
   @Field(() => String)
   @Prop()
   phone: string;

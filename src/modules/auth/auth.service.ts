@@ -11,10 +11,10 @@ export class AuthService {
   ) {}
 
   /**
-   * function for creating acces tokens
+   * function for creating acces/refresh tokens
    * @params {(jwtPayload , expiresIn:string)} takes a payload that includes the userID and a list of the user permissions and the expiration time
    * @returns {(Promise<Token>)} returns an access token
-   * @memberof UsersService
+   * @memberof AuthService
    */
   async createToken(
     userId: string,
@@ -27,7 +27,7 @@ export class AuthService {
     };
 
     const token = await this.jwtService.signAsync(jwtPayload, {
-      secret: this.configService.refreshToken,
+      secret: this.configService.accessToken,
       expiresIn,
     });
 

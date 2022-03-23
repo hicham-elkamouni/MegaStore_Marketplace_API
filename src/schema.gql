@@ -11,6 +11,7 @@ type User {
   _id: String!
   email: String!
   hash: String!
+  hashRerf: String
   phone: String!
   address: String!
   city: String!
@@ -23,6 +24,7 @@ type Query {
 
 type Mutation {
   signIn(signinInput: signinInput!): Auth!
+  logOut: Auth!
 }
 
 input signinInput {
