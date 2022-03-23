@@ -16,7 +16,7 @@ export class userResolver {
 
   @Query(() => User)
   async getAll() {
-    return 'tnakt';
+    return 'test';
   }
 
   @Mutation(() => Auth)

@@ -22,8 +22,13 @@ type User {
   store: String!
 }
 
+type Order {
+  _id: String!
+  userId: User!
+}
+
 type Query {
-  getAll: User!
+  getAll: Order!
 }
 
 type Mutation {
