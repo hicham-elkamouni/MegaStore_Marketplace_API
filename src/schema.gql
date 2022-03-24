@@ -46,6 +46,8 @@ type Cart {
 
 type User {
   _id: String!
+  name: String!
+  profilePic: String!
   email: String!
   hash: String!
   hashRerf: String!
@@ -56,7 +58,7 @@ type User {
   document: String!
   permissions: [String!]!
   cart: Cart!
-  store: String!
+  store: Store!
 }
 
 type Order {
@@ -70,10 +72,21 @@ type Query {
 
 type Mutation {
   signIn(signinInput: signinInput!): Auth!
-  logOut: Auth!
+  signUp(signupInput: signupInput!): Auth!
+  logOut: User!
 }
 
 input signinInput {
   email: String!
   password: String!
+}
+
+input signupInput {
+  name: String!
+  email: String!
+  password: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
 }

@@ -2,12 +2,22 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Cart } from './cart.model';
+import mongoose from 'mongoose';
+import { Store } from 'src/modules/store/model/store.model';
 
 @ObjectType()
 @Schema({ timestamps: true })
 export class User {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
+
+  @Field(() => String)
+  @Prop({ required: true })
+  name: string;
+
+  @Field(() => String)
+  @Prop()
+  profilePic: string;
 
   @Field(() => String)
   @Prop({ required: true, unique: true })
@@ -49,9 +59,9 @@ export class User {
   @Prop()
   cart: Cart;
 
-  @Field()
-  @Prop()
-  store: string;
+  @Field(() => Store)
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }] })
+  store: Store;
 }
 
 export type UserDocument = User & Document;
