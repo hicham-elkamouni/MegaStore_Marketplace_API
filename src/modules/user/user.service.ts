@@ -39,11 +39,16 @@ export class UserService {
       const [access_token, refresh_token] = await Promise.all([
         this.authService.createToken(
           user._id,
-          ['customer', 'admin'],
+          user.permissions,
           '15m',
           'access',
         ),
-        this.authService.createToken(user._id, ['customer'], '7d', 'refresh'),
+        this.authService.createToken(
+          user._id,
+          user.permissions,
+          '7d',
+          'refresh',
+        ),
       ]);
 
       // register the refresh token in the DB
@@ -77,4 +82,5 @@ export class UserService {
 
     return updated;
   }
+  // async register(): promise<Auth> {}
 }

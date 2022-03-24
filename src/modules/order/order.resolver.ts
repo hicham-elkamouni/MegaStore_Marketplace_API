@@ -1,10 +1,7 @@
-
 import { Resolver, Query } from '@nestjs/graphql';
 
 import { Order } from './model/order.model';
 import { OrderService } from './order.service';
-
-
 
 @Resolver('Order')
 export class orderResolver {
@@ -14,6 +11,4 @@ export class orderResolver {
   async getAll() {
     return 'test';
   }
-
-
 }

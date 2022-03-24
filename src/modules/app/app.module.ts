@@ -31,7 +31,7 @@ import { OrderModule } from '../order/order.module';
     }),
     UserModule,
     AuthModule,
-    OrderModule
+    OrderModule,
   ],
 })
 export class AppModule {}

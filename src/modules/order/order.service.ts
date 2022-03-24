@@ -5,9 +5,8 @@ import { Order, OrderDocument } from './model/order.model';
 
 @Injectable()
 export class OrderService {
-    constructor(
-        @InjectModel(Order.name)
-        private orderModel: Model<OrderDocument>,
-
-    ) { }
+  constructor(
+    @InjectModel(Order.name)
+    private orderModel: Model<OrderDocument>,
+  ) {}
 }

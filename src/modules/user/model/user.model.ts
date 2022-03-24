@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Cart } from './cart.model';
 
 @ObjectType()
 @Schema({ timestamps: true })
@@ -9,16 +10,16 @@ export class User {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
-  @Prop()
+  @Prop({ required: true, unique: true })
   email: string;
 
   @Field(() => String)
-  @Prop()
+  @Prop({ required: true })
   hash: string;
 
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   @Prop()
-  hashRerf?: string;
+  hashRerf: string;
 
   @Field(() => String)
   @Prop()
@@ -41,12 +42,12 @@ export class User {
   document: string;
 
   @Field(() => [String])
-  @Prop()
+  @Prop({ default: ['customer'] })
   permissions: string[];
 
-  @Field()
+  @Field(() => Cart)
   @Prop()
-  cart: string;
+  cart: Cart;
 
   @Field()
   @Prop()

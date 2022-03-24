@@ -13,9 +13,6 @@ export class Order {
   @Field(() => User)
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] })
   userId: User;
-  
-  
-
 }
 
 export type OrderDocument = Order & Document;
