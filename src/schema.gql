@@ -64,8 +64,16 @@ type Order {
   userId: User!
 }
 
+type SuperAdmin {
+  _id: String!
+  fullName: String!
+  email: String!
+  hash: String!
+  hashRef: String!
+}
+
 type Query {
-  getAll: Order!
+  getAll: SuperAdmin!
 }
 
 type Mutation {
