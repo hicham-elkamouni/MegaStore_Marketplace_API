@@ -4,6 +4,7 @@ import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Cart } from './cart.model';
 import mongoose from 'mongoose';
 import { Store } from 'src/modules/store/model/store.model';
+import { Order } from 'src/modules/order/model/order.model';
 
 @ObjectType()
 @Schema({ timestamps: true })
@@ -62,6 +63,10 @@ export class User {
   @Field(() => Store)
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }] })
   store: Store;
+
+  @Field(() => [Order])
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }] })
+  orders: Order[];
 }
 
 export type UserDocument = User & Document;

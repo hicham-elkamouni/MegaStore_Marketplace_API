@@ -44,6 +44,11 @@ type Cart {
   quantity: Int!
 }
 
+type Order {
+  _id: String!
+  userId: User!
+}
+
 type User {
   _id: String!
   name: String!
@@ -59,11 +64,7 @@ type User {
   permissions: [String!]!
   cart: Cart!
   store: Store!
-}
-
-type Order {
-  _id: String!
-  userId: User!
+  orders: [Order!]!
 }
 
 type Query {
