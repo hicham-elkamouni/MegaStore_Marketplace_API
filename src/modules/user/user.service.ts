@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './model/user.model';
 import { Model } from 'mongoose';
-import { signinInput, signupInput } from './dto';
-import { Auth } from './model/auth.model';
+import { signupInput } from './dto';
+import { signinInput } from '../auth/dto/signin.input';
+import { Auth } from '../auth/model/auth.model';
 
 import { ApolloError } from 'apollo-server-express';
 import * as argon from 'argon2';
@@ -15,7 +16,7 @@ export class UserService {
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   /**
    * function for login the user

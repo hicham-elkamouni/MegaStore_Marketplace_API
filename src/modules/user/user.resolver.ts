@@ -5,14 +5,15 @@ import { Roles } from '../auth/decorators/role.decorator';
 import { Allowed } from '../auth/guards/Allowed.guard';
 import { JwtGuard } from '../auth/guards/JwtGuard.guard';
 import { RolesGuard } from '../auth/guards/RolesGuard.guard';
-import { signinInput, signupInput } from './dto';
-import { Auth } from './model/auth.model';
+import { signupInput } from './dto';
+import { signinInput } from '../auth/dto/signin.input';
+import { Auth } from '../auth/model/auth.model';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
 
 @Resolver('User')
 export class userResolver {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   @Query(() => User)
   async getAll() {
