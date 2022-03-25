@@ -75,14 +75,23 @@ type SuperAdmin {
   hashRef: String!
 }
 
+type Admin {
+  _id: String!
+  fullName: String!
+  email: String!
+  hash: String!
+  hashRef: String!
+}
+
 type Query {
-  getAll: SuperAdmin!
+  getAll: Admin!
 }
 
 type Mutation {
   signIn(signinInput: signinInput!): Auth!
   signUp(signupInput: signupInput!): Auth!
   logOut: User!
+  superAdminLogin(signinInput: signinInput!): Auth!
 }
 
 input signinInput {
