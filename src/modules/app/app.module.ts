@@ -10,6 +10,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UserModule } from '../user/user.module';
 import { OrderModule } from '../order/order.module';
 import { SuperAdminModule } from '../super-admin/super-admin.module';
+import { AdminModule } from '../admin/admin.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { SuperAdminModule } from '../super-admin/super-admin.module';
     UserModule,
     AuthModule,
     OrderModule,
-    SuperAdminModule
+    SuperAdminModule,
+    AdminModule
   ],
 })
 export class AppModule {}
