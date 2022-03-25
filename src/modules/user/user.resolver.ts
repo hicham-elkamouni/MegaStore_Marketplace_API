@@ -5,18 +5,19 @@ import { Roles } from '../auth/decorators/role.decorator';
 import { Allowed } from '../auth/guards/Allowed.guard';
 import { JwtGuard } from '../auth/guards/JwtGuard.guard';
 import { RolesGuard } from '../auth/guards/RolesGuard.guard';
-import { signinInput } from './dto';
-import { Auth } from './model/auth.model';
+import { signupInput } from './dto';
+import { signinInput } from '../auth/dto/signin.input';
+import { Auth } from '../auth/model/auth.model';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
 
 @Resolver('User')
 export class userResolver {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   @Query(() => User)
   async getAll() {
-    return 'tnakt';
+    return 'test';
   }
 
   @Mutation(() => Auth)
@@ -24,8 +25,13 @@ export class userResolver {
     return this.userService.signIn(signinInput);
   }
 
-  @Allowed(['admin', 'asd'])
   @Mutation(() => Auth)
+  async signUp(@Args('signupInput') signupInput: signupInput): Promise<Auth> {
+    return this.userService.signUp(signupInput);
+  }
+
+  @Allowed(['customer,seller'])
+  @Mutation(() => User)
   async logOut(@Context('req') req: any): Promise<User> {
     const userId = req.user?.userId;
     return this.userService.logOut(userId);
