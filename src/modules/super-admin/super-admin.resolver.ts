@@ -13,8 +13,8 @@ export class SuperAdminResolver {
     return 'test';
   }
 
-  @Mutation(() => Auth)
-  async superAdminLogin(@Args('signinInput') signinInput: signinInput): Promise<Auth> {
+  @Mutation(() => Auth, { name: 'superAdminLogin' })
+  async signIn(@Args('signinInput') signinInput: signinInput): Promise<Auth> {
     return this.superAdminService.signIn(signinInput)
   }
 
