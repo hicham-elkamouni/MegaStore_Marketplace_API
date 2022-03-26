@@ -22,6 +22,13 @@ export class ConfigService {
       DATABASE_URI: Joi.string().required(),
       ACCESS_TOKEN: Joi.string().required(),
       REFRESH_TOKEN: Joi.string().required(),
+      FIREBASE_API_KEY: Joi.string().required(),
+      FIREBASE_AUTH_DOMAIN: Joi.string().required(),
+      FIREBASE_PROJECT_ID: Joi.string().required(),
+      FIREBASE_STORAGE_BUCKET: Joi.string().required(),
+      FIREBASE_MESSAGING_SENDER: Joi.string().required(),
+      FIREBASE_APP_ID: Joi.string().required(),
+      FIREBASE_STORAGE_URL: Joi.string().required(),
     });
 
     const { error, value: validatedEnvConfig } =
@@ -42,5 +49,26 @@ export class ConfigService {
   }
   get refreshToken(): string {
     return this.envConfig.REFRESH_TOKEN;
+  }
+  get firebaseApiKey(): string {
+    return this.envConfig.FIREBASE_API_KEY;
+  }
+  get firebaseAuthDomain(): string {
+    return this.envConfig.FIREBASE_AUTH_DOMAIN;
+  }
+  get firebaseProjectId(): string {
+    return this.envConfig.FIREBASE_PROJECT_ID;
+  }
+  get firebaseStorageBucket(): string {
+    return this.envConfig.FIREBASE_STORAGE_BUCKET;
+  }
+  get firebaseMessaginSender(): string {
+    return this.envConfig.FIREBASE_MESSAGING_SENDER;
+  }
+  get firebaseAppId(): string {
+    return this.envConfig.FIREBASE_APP_ID;
+  }
+  get firebaseStorageUrl(): string {
+    return this.envConfig.FIREBASE_STORAGE_URL;
   }
 }

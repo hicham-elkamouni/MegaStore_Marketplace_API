@@ -16,7 +16,7 @@ export class UserService {
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   /**
    * function for login the user

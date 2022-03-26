@@ -5,8 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SuperAdmin, SuperAdminSchema } from './model/super-admin.model';
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: SuperAdmin.name, schema: SuperAdminSchema }]),
+    MongooseModule.forFeature([
+      { name: SuperAdmin.name, schema: SuperAdminSchema },
+    ]),
   ],
-  providers: [SuperAdminService, SuperAdminResolver]
+  providers: [SuperAdminService, SuperAdminResolver],
 })
-export class SuperAdminModule { }
+export class SuperAdminModule {}

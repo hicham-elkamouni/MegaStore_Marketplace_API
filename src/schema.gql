@@ -92,6 +92,7 @@ type Mutation {
   signUp(signupInput: signupInput!): Auth!
   logOut: User!
   superAdminLogin(signinInput: signinInput!): Auth!
+  uploadFile(file: [Upload!]!): Boolean!
 }
 
 input signinInput {
@@ -108,3 +109,6 @@ input signupInput {
   city: String!
   address: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
