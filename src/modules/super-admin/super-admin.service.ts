@@ -13,17 +13,16 @@ export class SuperAdminService {
     @InjectModel(SuperAdmin.name)
     private superAdminModel: Model<SuperAdminDocument>,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   /**
- * function for superAdmin login
- * @params {(signinInput)} takes the superAdmin credentials
- * @returns {(Promise<Auth>)} returns a an access token and the userId and store a refresh token in DB
- * @memberof UsersService
- */
+   * function for superAdmin login
+   * @params {(signinInput)} takes the superAdmin credentials
+   * @returns {(Promise<Auth>)} returns a an access token and the userId and store a refresh token in DB
+   * @memberof UsersService
+   */
 
   async signIn(signinInput: signinInput): Promise<Auth> {
-
     try {
       const { email, password } = signinInput;
 
@@ -37,18 +36,8 @@ export class SuperAdminService {
 
       // create an access and a refresh token
       const [access_token, refresh_token] = await Promise.all([
-        this.authService.createToken(
-          doc._id,
-          doc.permissions,
-          '15m',
-          'access',
-        ),
-        this.authService.createToken(
-          doc._id,
-          doc.permissions,
-          '7d',
-          'refresh',
-        ),
+        this.authService.createToken(doc._id, doc.permissions, '15m', 'access'),
+        this.authService.createToken(doc._id, doc.permissions, '7d', 'refresh'),
       ]);
 
       // register the refresh token in the DB
@@ -59,7 +48,6 @@ export class SuperAdminService {
       return error;
     }
   }
-
 
   async updateRtHash(userId: number, rt: string): Promise<SuperAdmin> {
     //hash the refreshToken
