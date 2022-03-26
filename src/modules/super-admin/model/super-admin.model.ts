@@ -25,6 +25,10 @@ export class SuperAdmin {
     @Prop()
     hashRef: string;
 
+    @Field(() => [String])
+    @Prop({ default: ['superAdmin'] })
+    permissions: string[];
+
 }
 
 export type SuperAdminDocument = SuperAdmin & Document;
