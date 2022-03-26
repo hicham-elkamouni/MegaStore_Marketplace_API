@@ -93,6 +93,7 @@ type Mutation {
   signUp(signupInput: signupInput!): Auth!
   logOut: User!
   superAdminLogin(signinInput: signinInput!): Auth!
+  superAdminLogout: SuperAdmin!
 }
 
 input signinInput {
