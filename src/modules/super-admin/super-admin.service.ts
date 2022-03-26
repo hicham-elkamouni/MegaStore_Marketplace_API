@@ -23,8 +23,6 @@ export class SuperAdminService {
    */
 
   async signIn(signinInput: signinInput): Promise<Auth> {
-    console.log('admin');
-
     try {
       const { email, password } = signinInput;
 
@@ -38,8 +36,8 @@ export class SuperAdminService {
 
       // create an access and a refresh token
       const [access_token, refresh_token] = await Promise.all([
-        this.authService.createToken(doc._id, ['SuperAdmin'], '15m', 'access'),
-        this.authService.createToken(doc._id, ['SuperAdmin'], '7d', 'refresh'),
+        this.authService.createToken(doc._id, doc.permissions, '15m', 'access'),
+        this.authService.createToken(doc._id, doc.permissions, '7d', 'refresh'),
       ]);
 
       // register the refresh token in the DB

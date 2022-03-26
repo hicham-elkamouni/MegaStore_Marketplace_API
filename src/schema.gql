@@ -72,7 +72,7 @@ type SuperAdmin {
   fullName: String!
   email: String!
   hash: String!
-  hashRef: String!
+  permissions: [String!]!
 }
 
 type Admin {

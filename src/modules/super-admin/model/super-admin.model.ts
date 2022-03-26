@@ -20,9 +20,9 @@ export class SuperAdmin {
   @Prop({ required: true })
   hash: string;
 
-  @Field(() => String)
-  @Prop()
-  hashRef: string;
+  @Field(() => [String])
+  @Prop({ default: ['superAdmin'] })
+  permissions: string[];
 }
 
 export type SuperAdminDocument = SuperAdmin & Document;
