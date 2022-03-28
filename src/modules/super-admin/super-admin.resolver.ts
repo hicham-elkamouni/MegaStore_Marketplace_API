@@ -1,11 +1,17 @@
 import { SuperAdmin } from './model/super-admin.model';
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { SuperAdminService } from './super-admin.service';
 import { Auth } from '../auth/model/auth.model';
 import { signinInput } from '../auth/dto/signin.input';
+import { Allowed } from '../auth/guards/Allowed.guard';
+import { Admin } from '../admin/model/admin.model';
+import { adminInput } from './dto';
+import { AdminService } from '../admin/admin.service';
 @Resolver('SuperAdmin')
 export class SuperAdminResolver {
-  constructor(private superAdminService: SuperAdminService) {}
+  constructor(
+    private superAdminService: SuperAdminService,
+    private adminService: AdminService) { }
 
   @Query(() => SuperAdmin)
   async getAll() {
@@ -16,4 +22,17 @@ export class SuperAdminResolver {
   async signIn(@Args('signinInput') signinInput: signinInput): Promise<Auth> {
     return this.superAdminService.signIn(signinInput);
   }
+
+  @Allowed(['superAdmin'])
+  @Mutation(() => SuperAdmin, { name: 'superAdminLogout' })
+  async logOut(@Context('req') req: any): Promise<SuperAdmin> {
+    const userId = req.user?.userId;
+    return this.superAdminService.logOut(userId);
+  }
+
+  @Mutation(() => Admin, { name: 'CreateAdmin' })
+  async createAdmin(@Args('adminInput') adminInput: adminInput): Promise<Admin> {
+    return this.adminService.create(adminInput);
+  }
+
 }

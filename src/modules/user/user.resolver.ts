@@ -30,7 +30,7 @@ export class userResolver {
     return this.userService.signUp(signupInput);
   }
 
-  @Allowed(['customer,seller'])
+  @Allowed(['customer','seller'])
   @Mutation(() => User)
   async logOut(@Context('req') req: any): Promise<User> {
     const userId = req.user?.userId;

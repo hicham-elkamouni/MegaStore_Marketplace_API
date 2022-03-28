@@ -51,13 +51,25 @@ export class SuperAdminService {
 
   async updateRtHash(userId: number, rt: string): Promise<SuperAdmin> {
     //hash the refreshToken
-    const hashRerf = await argon.hash(rt);
+    const hashRef = await argon.hash(rt);
     //register the refresh token in DB
     const updated = await this.superAdminModel.findOneAndUpdate(
       { _id: userId },
-      { hashRerf },
+      { hashRef },
       { new: true },
     );
+    return updated;
+  }
+
+  async logOut(userId: number): Promise<SuperAdmin> {
+    //set the refresh token hash to null in the DB
+
+    const updated = await this.superAdminModel.findOneAndUpdate(
+      { _id: userId },
+      { hashRef: null },
+      { new: true },
+    );
+
     return updated;
   }
 }
