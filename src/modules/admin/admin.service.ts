@@ -16,7 +16,7 @@ export class AdminService {
     @InjectModel(Admin.name)
     private adminModel: Model<AdminDocument>,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   /**
    * function for admin login
@@ -76,13 +76,13 @@ export class AdminService {
       if (doc) throw new ApolloError('email already exist');
 
       // hash the user password
-      const hash = await argon.hash(password);
+      const hashedPassword = await argon.hash(password);
 
       // create the user
       const createdAdmin = await this.adminModel.create({
         fullName,
         email,
-        hash,
+        hashedPassword,
       });
       if (!createdAdmin)
         throw new ApolloError('failed to create user try again');
@@ -91,4 +91,5 @@ export class AdminService {
       return error;
     }
   }
+
 }

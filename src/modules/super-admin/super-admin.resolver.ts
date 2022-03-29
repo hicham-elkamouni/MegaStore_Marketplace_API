@@ -12,7 +12,7 @@ export class SuperAdminResolver {
   constructor(
     private superAdminService: SuperAdminService,
     private adminService: AdminService,
-  ) {}
+  ) { }
 
   @Query(() => SuperAdmin)
   async getAll() {
