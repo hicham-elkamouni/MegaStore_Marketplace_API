@@ -23,6 +23,10 @@ export class Admin {
   @Field(() => String)
   @Prop()
   hashRef: string;
+
+  @Field(() => [String])
+  @Prop({ default: ['admin'] })
+  permissions: string[];
 }
 
 export type AdminDocument = Admin & Document;

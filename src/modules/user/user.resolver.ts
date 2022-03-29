@@ -1,12 +1,7 @@
-import { Req, UseGuards } from '@nestjs/common';
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
-import { Request } from 'express';
-import { Roles } from '../auth/decorators/role.decorator';
 import { Allowed } from '../auth/guards/Allowed.guard';
-import { JwtGuard } from '../auth/guards/JwtGuard.guard';
-import { RolesGuard } from '../auth/guards/RolesGuard.guard';
-import { signupInput } from './dto';
-import { signinInput } from '../auth/dto/signin.input';
+import { signUpInput } from './dto';
+import { signInInput } from '../auth/dto/signin.input';
 import { Auth } from '../auth/model/auth.model';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
@@ -21,12 +16,12 @@ export class userResolver {
   }
 
   @Mutation(() => Auth)
-  async signIn(@Args('signinInput') signinInput: signinInput): Promise<Auth> {
+  async signIn(@Args('signinInput') signinInput: signInInput): Promise<Auth> {
     return this.userService.signIn(signinInput);
   }
 
   @Mutation(() => Auth)
-  async signUp(@Args('signupInput') signupInput: signupInput): Promise<Auth> {
+  async signUp(@Args('signupInput') signupInput: signUpInput): Promise<Auth> {
     return this.userService.signUp(signupInput);
   }
 

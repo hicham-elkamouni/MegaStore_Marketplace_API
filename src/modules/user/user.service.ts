@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './model/user.model';
 import { Model } from 'mongoose';
-import { signupInput } from './dto';
-import { signinInput } from '../auth/dto/signin.input';
+import { signUpInput } from './dto';
+import { signInInput } from '../auth/dto/signin.input';
 import { Auth } from '../auth/model/auth.model';
 
 import { ApolloError } from 'apollo-server-express';
@@ -24,7 +24,7 @@ export class UserService {
    * @returns {(Promise<Auth>)} returns a an acces token and the userId and store a refresh token in DB
    * @memberof UsersService
    */
-  async signIn(signinInput: signinInput): Promise<Auth> {
+  async signIn(signinInput: signInInput): Promise<Auth> {
     try {
       const { email, password } = signinInput;
 
@@ -33,23 +33,13 @@ export class UserService {
 
       if (!user) throw new ApolloError('Email not found');
       // check the user password
-      const passwordMatches = await argon.verify(user.hash, password);
+      const passwordMatches = await argon.verify(user.hashedPassword, password);
       if (!passwordMatches) throw new ApolloError('password not correct');
 
       // create an access and a refresh token
       const [access_token, refresh_token] = await Promise.all([
-        this.authService.createToken(
-          user._id,
-          user.permissions,
-          '15m',
-          'access',
-        ),
-        this.authService.createToken(
-          user._id,
-          user.permissions,
-          '7d',
-          'refresh',
-        ),
+        this.authService.createToken(user._id, user.roles, '15m', 'access'),
+        this.authService.createToken(user._id, user.roles, '7d', 'refresh'),
       ]);
 
       // register the refresh token in the DB
@@ -72,7 +62,7 @@ export class UserService {
     //register the refresh token in DB
     const updated = await this.userModel.findOneAndUpdate(
       { _id: userId },
-      { hashRerf },
+      { hashedRt: hashRerf },
       { new: true },
     );
     return updated;
@@ -101,7 +91,7 @@ export class UserService {
    * @returns {(Promise<Auth>)} returns a an acces token and the userId and store a refresh token in DB
    * @memberof UsersService
    */
-  async signUp(signupInput: signupInput): Promise<Auth> {
+  async signUp(signupInput: signUpInput): Promise<Auth> {
     try {
       const { email, password, phone, country, city, address, name } =
         signupInput;
@@ -127,13 +117,13 @@ export class UserService {
       const [access_token, refresh_token] = await Promise.all([
         this.authService.createToken(
           createdUser._id,
-          createdUser.permissions,
+          createdUser.roles,
           '15m',
           'access',
         ),
         this.authService.createToken(
           createdUser._id,
-          createdUser.permissions,
+          createdUser.roles,
           '7d',
           'refresh',
         ),

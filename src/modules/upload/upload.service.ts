@@ -12,17 +12,17 @@ export class UploadService {
     'application/msword',
   ];
 
-  async uploadFiles(files: FileUpload) {
-    const x = await Promise.all(
-      files.map(async (file) => {
-        const valide = await this.IsvalideMimeType(file);
-        if (!valide) return false;
-        else return true;
-      }),
-    );
+  // async uploadFiles(files: FileUpload) {
+  //   const x = await Promise.all(
+  //     files.map(async (file) => {
+  //       const valide = await this.IsvalideMimeType(file);
+  //       if (!valide) return false;
+  //       else return true;
+  //     }),
+  //   );
 
-    return x.every((e) => e == true);
-  }
+  //   return x.every((e) => e == true);
+  // }
 
   IsvalideMimeType = async (file) => {
     const { mimetype } = await file;

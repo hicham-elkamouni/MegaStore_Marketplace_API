@@ -26,11 +26,11 @@ export class User {
 
   @Field(() => String)
   @Prop({ required: true })
-  hash: string;
+  hashedPassword: string;
 
   @Field(() => String)
   @Prop()
-  hashRerf: string;
+  hashedRt: string;
 
   @Field(() => String)
   @Prop()
@@ -54,7 +54,7 @@ export class User {
 
   @Field(() => [String])
   @Prop({ default: ['customer'] })
-  permissions: string[];
+  roles: string[];
 
   @Field(() => Cart)
   @Prop()
