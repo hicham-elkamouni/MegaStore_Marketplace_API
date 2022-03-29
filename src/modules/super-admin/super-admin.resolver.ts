@@ -28,6 +28,7 @@ export class SuperAdminResolver {
     return this.superAdminService.logOut(userId);
   }
 
+  @Allowed(['superAdmin'])
   @Mutation(() => Admin, { name: 'CreateAdmin' })
   async createAdmin(
     @Args('createAdminInput') createAdminInput: CreateAdminInput,
@@ -35,21 +36,25 @@ export class SuperAdminResolver {
     return this.adminService.create(createAdminInput);
   }
 
+  @Allowed(['superAdmin'])
   @Mutation(() => Admin, { name: 'UpdateAdmin' })
   async updateAdmin(@Args('updateAdminInput') updateAdminInput: UpdateAdminInput): Promise<Admin> {
     return this.adminService.update(updateAdminInput);
   }
 
+  @Allowed(['superAdmin'])
   @Query(() => [Admin], { name: 'getAllAdmins' })
   async getAllAdmins(): Promise<Admin[]> {
     return this.adminService.getAll();
   }
 
+  @Allowed(['superAdmin'])
   @Query(() => Admin, { name: 'getAdminById' })
   async getAdminById(@Args('id') id: string): Promise<Admin> {
     return this.adminService.getById(id);
   }
 
+  @Allowed(['superAdmin'])
   @Mutation(() => Admin, { name: 'DeleteAdmin' })
   async deleteAdmin(@Args('id') id: string): Promise<Admin> {
     return this.adminService.delete(id);
