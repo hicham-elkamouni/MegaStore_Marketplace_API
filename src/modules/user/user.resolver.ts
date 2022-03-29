@@ -16,13 +16,13 @@ export class userResolver {
   }
 
   @Mutation(() => Auth)
-  async signIn(@Args('signinInput') signinInput: signInInput): Promise<Auth> {
-    return this.userService.signIn(signinInput);
+  async signIn(@Args('signInInput') signInInput: signInInput): Promise<Auth> {
+    return this.userService.signIn(signInInput);
   }
 
   @Mutation(() => Auth)
-  async signUp(@Args('signupInput') signupInput: signUpInput): Promise<Auth> {
-    return this.userService.signUp(signupInput);
+  async signUp(@Args('signUpInput') signUpInput: signUpInput): Promise<Auth> {
+    return this.userService.signUp(signUpInput);
   }
 
   @Allowed(['customer', 'seller'])

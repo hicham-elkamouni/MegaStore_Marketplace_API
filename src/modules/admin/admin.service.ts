@@ -34,23 +34,16 @@ export class AdminService {
       if (!admin) throw new ApolloError('Email not found');
 
       //check the user
-      const passwordMatches = await argon.verify(admin.hash, password);
+      const passwordMatches = await argon.verify(
+        admin.hashedPassword,
+        password,
+      );
       if (!passwordMatches) throw new ApolloError('password not correct');
 
       // create an access and a refresh token
       const [access_token, refresh_token] = await Promise.all([
-        this.authService.createToken(
-          admin._id,
-          admin.permissions,
-          '15m',
-          'access',
-        ),
-        this.authService.createToken(
-          admin._id,
-          admin.permissions,
-          '7d',
-          'refresh',
-        ),
+        this.authService.createToken(admin._id, admin.roles, '15m', 'access'),
+        this.authService.createToken(admin._id, admin.roles, '7d', 'refresh'),
       ]);
 
       // register the refresh token in the DB

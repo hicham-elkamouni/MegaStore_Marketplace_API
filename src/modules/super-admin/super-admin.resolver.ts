@@ -20,8 +20,8 @@ export class SuperAdminResolver {
   }
 
   @Mutation(() => Auth, { name: 'superAdminLogin' })
-  async signIn(@Args('signinInput') signinInput: signInInput): Promise<Auth> {
-    return this.superAdminService.signIn(signinInput);
+  async signIn(@Args('signInInput') signInInput: signInInput): Promise<Auth> {
+    return this.superAdminService.signIn(signInInput);
   }
 
   @Allowed(['superAdmin'])

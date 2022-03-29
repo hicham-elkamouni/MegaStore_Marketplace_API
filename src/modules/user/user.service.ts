@@ -24,9 +24,9 @@ export class UserService {
    * @returns {(Promise<Auth>)} returns a an acces token and the userId and store a refresh token in DB
    * @memberof UsersService
    */
-  async signIn(signinInput: signInInput): Promise<Auth> {
+  async signIn(signInInput: signInInput): Promise<Auth> {
     try {
-      const { email, password } = signinInput;
+      const { email, password } = signInInput;
 
       // check the email provided
       const user = await this.userModel.findOne({ email });
@@ -91,10 +91,10 @@ export class UserService {
    * @returns {(Promise<Auth>)} returns a an acces token and the userId and store a refresh token in DB
    * @memberof UsersService
    */
-  async signUp(signupInput: signUpInput): Promise<Auth> {
+  async signUp(signUpInput: signUpInput): Promise<Auth> {
     try {
       const { email, password, phone, country, city, address, name } =
-        signupInput;
+        signUpInput;
 
       const user = await this.userModel.findOne({ email });
       if (user) throw new ApolloError('email already exist');
