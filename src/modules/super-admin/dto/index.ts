@@ -1,1 +1,2 @@
-export * from './admin.input';
+export * from './createAdmin.input';
+export * from './updateAdmin.input';

@@ -95,7 +95,8 @@ type Mutation {
   logOut: Boolean!
   superAdminLogin(signInInput: signInInput!): Auth!
   superAdminLogout: SuperAdmin!
-  CreateAdmin(adminInput: adminInput!): Admin!
+  CreateAdmin(createAdminInput: CreateAdminInput!): Admin!
+  UpdateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
   adminLogin(signinInput: signInInput!): Auth!
 }
 
@@ -114,8 +115,15 @@ input signUpInput {
   address: String!
 }
 
-input adminInput {
+input CreateAdminInput {
   fullName: String!
   email: String!
   password: String!
+}
+
+input UpdateAdminInput {
+  id: String!
+  fullName: String
+  email: String
+  password: String
 }

@@ -1,4 +1,4 @@
-import { adminInput } from './../super-admin/dto/admin.input';
+import { CreateAdminInput, UpdateAdminInput } from './../super-admin/dto';
 import { Mutation } from '@nestjs/graphql';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
@@ -67,9 +67,9 @@ export class AdminService {
     return updated;
   }
 
-  async create(adminInput: adminInput): Promise<any> {
+  async create(createAdminInput: CreateAdminInput): Promise<Admin> {
     try {
-      const { fullName, email, password } = adminInput;
+      const { fullName, email, password } = createAdminInput;
 
       // check if the email is already used
       const doc = await this.adminModel.findOne({ email });
@@ -92,4 +92,35 @@ export class AdminService {
     }
   }
 
+  async update(updateAdminInput: UpdateAdminInput): Promise<Admin> {
+    try {
+      const { id, fullName, email, password } = updateAdminInput;
+
+      // find the admin
+      const doc = await this.adminModel.findOne({ _id: id });
+      if (!doc) throw new ApolloError('user not found');
+
+      // hashe the password
+      if (password) {
+        const hashedPassword = await argon.hash(password);
+        doc.hashedPassword = hashedPassword;
+      }
+
+      // update the document
+      fullName ? doc.fullName = fullName : null;
+      email ? doc.email = email : null;
+
+      // save the document
+      const updatedAdmin = await doc.save();
+
+      // Check if the document has not been updated
+      if (!updatedAdmin)
+        throw new ApolloError('failed to update user try again');
+
+      // return the updated document
+      return updatedAdmin;
+    } catch (error) {
+      return error;
+    }
+  }
 }
