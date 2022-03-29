@@ -5,7 +5,7 @@ import { Auth } from '../auth/model/auth.model';
 import { signInInput } from '../auth/dto/signin.input';
 import { Allowed } from '../auth/guards/Allowed.guard';
 import { Admin } from '../admin/model/admin.model';
-import { CreateAdminInput, UpdateAdminInput } from './dto';
+import { CreateAdminInput, UpdateAdminInput } from '../admin/dto';
 import { AdminService } from '../admin/admin.service';
 
 @Resolver('SuperAdmin')

@@ -1,4 +1,4 @@
-import { CreateAdminInput, UpdateAdminInput } from './../super-admin/dto';
+import { CreateAdminInput, UpdateAdminInput } from './dto';
 import { Mutation } from '@nestjs/graphql';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
