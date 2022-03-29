@@ -134,4 +134,14 @@ export class AdminService {
     }
 
   }
+
+  async getById(id: string): Promise<Admin> {
+    try {
+      const admin = await this.adminModel.findOne({ _id: id });
+      if (!admin) throw new ApolloError('user not found');
+      return admin;
+    } catch (error) {
+      return error;
+    }
+  }
 }

@@ -44,4 +44,9 @@ export class SuperAdminResolver {
   async getAllAdmins(): Promise<Admin[]> {
     return this.adminService.getAll();
   }
+
+  @Query(() => Admin, { name: 'getAdminById' })
+  async getAdminById(@Args('id') id: string): Promise<Admin> {
+    return this.adminService.getById(id);
+  }
 }
