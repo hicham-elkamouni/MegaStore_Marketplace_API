@@ -74,15 +74,15 @@ export class UserService {
    * @returns {(Promise<User>)} returns the loggedOut user and deletes his refresh token
    * @memberof UsersService
    */
-  async logOut(userId: number): Promise<User> {
+  async logOut(userId: number): Promise<boolean> {
     //set the refresh token hash to null in the DB
     const updated = await this.userModel.findOneAndUpdate(
-      { _id: userId },
-      { hashRerf: null },
+      { _id: userId, hashedRt: { $ne: null } },
+      { hashedRt: null },
       { new: true },
     );
-
-    return updated;
+    if (updated) return true;
+    return false;
   }
 
   /**
@@ -99,7 +99,7 @@ export class UserService {
       const user = await this.userModel.findOne({ email });
       if (user) throw new ApolloError('email already exist');
       // hash the user password
-      const hash = await argon.hash(password);
+      const hashedPassword = await argon.hash(password);
       // create the user
       const createdUser = await this.userModel.create({
         name,
@@ -109,7 +109,7 @@ export class UserService {
         country,
         city,
         address,
-        hash,
+        hashedPassword,
       });
       if (!createdUser)
         throw new ApolloError('failed to create user try again');

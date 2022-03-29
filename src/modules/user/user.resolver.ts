@@ -26,8 +26,8 @@ export class userResolver {
   }
 
   @Allowed(['customer', 'seller'])
-  @Mutation(() => User)
-  async logOut(@Context('req') req: any): Promise<User> {
+  @Mutation(() => Boolean)
+  async logOut(@Context('req') req: any): Promise<boolean> {
     const userId = req.user?.userId;
     return this.userService.logOut(userId);
   }

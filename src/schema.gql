@@ -92,7 +92,7 @@ type Query {
 type Mutation {
   signIn(signInInput: signInInput!): Auth!
   signUp(signUpInput: signUpInput!): Auth!
-  logOut: User!
+  logOut: Boolean!
   superAdminLogin(signInInput: signInInput!): Auth!
   superAdminLogout: SuperAdmin!
   CreateAdmin(adminInput: adminInput!): Admin!
