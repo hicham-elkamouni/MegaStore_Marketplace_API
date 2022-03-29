@@ -99,6 +99,7 @@ type Mutation {
   superAdminLogout: SuperAdmin!
   CreateAdmin(createAdminInput: CreateAdminInput!): Admin!
   UpdateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
+  DeleteAdmin(id: String!): Admin!
   adminLogin(signinInput: signInInput!): Auth!
 }
 

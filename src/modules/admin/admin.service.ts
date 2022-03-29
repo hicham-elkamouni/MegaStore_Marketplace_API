@@ -144,4 +144,16 @@ export class AdminService {
       return error;
     }
   }
+
+  async delete(id: string): Promise<Admin> {
+    try {
+      const admin = await this.adminModel.findOne({ _id: id });
+      if (!admin) throw new ApolloError('user not found');
+      const deletedAdmin = await this.adminModel.findByIdAndDelete(id);
+      if (!deletedAdmin) throw new ApolloError('failed to delete user');
+      return deletedAdmin;
+    } catch (error) {
+      return error;
+    }
+  }
 }

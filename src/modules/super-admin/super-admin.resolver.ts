@@ -49,4 +49,9 @@ export class SuperAdminResolver {
   async getAdminById(@Args('id') id: string): Promise<Admin> {
     return this.adminService.getById(id);
   }
+
+  @Mutation(() => Admin, { name: 'DeleteAdmin' })
+  async deleteAdmin(@Args('id') id: string): Promise<Admin> {
+    return this.adminService.delete(id);
+  }
 }
