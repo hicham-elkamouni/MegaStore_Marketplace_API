@@ -123,4 +123,15 @@ export class AdminService {
       return error;
     }
   }
+
+  async getAll(): Promise<Admin[]> {
+    try {
+      const admins = await this.adminModel.find();
+      if (!admins) throw new ApolloError('no admins found');
+      return admins;
+    } catch (error) {
+      return error;
+    }
+
+  }
 }

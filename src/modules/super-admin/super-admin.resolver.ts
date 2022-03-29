@@ -15,10 +15,6 @@ export class SuperAdminResolver {
     private adminService: AdminService,
   ) { }
 
-  @Query(() => SuperAdmin)
-  async getAll() {
-    return 'test';
-  }
 
   @Mutation(() => Auth, { name: 'superAdminLogin' })
   async signIn(@Args('signInInput') signInInput: signInInput): Promise<Auth> {
@@ -42,5 +38,10 @@ export class SuperAdminResolver {
   @Mutation(() => Admin, { name: 'UpdateAdmin' })
   async updateAdmin(@Args('updateAdminInput') updateAdminInput: UpdateAdminInput): Promise<Admin> {
     return this.adminService.update(updateAdminInput);
+  }
+
+  @Query(() => [Admin], { name: 'getAllAdmins' })
+  async getAllAdmins(): Promise<Admin[]> {
+    return this.adminService.getAll();
   }
 }

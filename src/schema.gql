@@ -87,6 +87,7 @@ type Admin {
 
 type Query {
   getAll: Admin!
+  getAllAdmins: [Admin!]!
 }
 
 type Mutation {
