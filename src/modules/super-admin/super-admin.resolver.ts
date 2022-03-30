@@ -7,12 +7,15 @@ import { Allowed } from '../auth/guards/Allowed.guard';
 import { Admin } from '../admin/model/admin.model';
 import { CreateAdminInput, UpdateAdminInput } from '../admin/dto';
 import { AdminService } from '../admin/admin.service';
+import { UserService } from '../user/user.service';
+import { User } from '../user/model/user.model';
 
 @Resolver('SuperAdmin')
 export class SuperAdminResolver {
   constructor(
     private superAdminService: SuperAdminService,
     private adminService: AdminService,
+    private userService: UserService
   ) { }
 
 
@@ -58,5 +61,10 @@ export class SuperAdminResolver {
   @Mutation(() => Admin, { name: 'DeleteAdmin' })
   async deleteAdmin(@Args('id') id: string): Promise<Admin> {
     return this.adminService.delete(id);
+  }
+
+  @Mutation(() => User, { name: 'handleRequestSeller' })
+  async handleRequestSeller(@Args('id') id: string): Promise<User> {
+    return this.userService.handleRequestSeller(id)
   }
 }

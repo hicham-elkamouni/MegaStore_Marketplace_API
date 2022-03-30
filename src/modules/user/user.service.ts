@@ -16,7 +16,7 @@ export class UserService {
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   /**
    * function for login the user
@@ -136,4 +136,17 @@ export class UserService {
       return error;
     }
   }
+
+  async handleRequestSeller(userId: string): Promise<User> {
+    const user = await this.userModel.findById(userId);
+    if (!user) throw new ApolloError('user not found');
+    user.roles.push('seller');
+    const updated = await this.userModel.findOneAndUpdate(
+      { _id: userId },
+      { roles: user.roles },
+      { new: true },
+    );
+    return updated;
+  }
+
 }
