@@ -18,13 +18,24 @@ type Category {
   parent: String
 }
 
+type Seller {
+  _id: String!
+  fullName: String!
+  email: String!
+  role: String!
+  status: String!
+  fiscale: String!
+  hash: String!
+  qtore: Store!
+}
+
 type Store {
   _id: String!
   name: String!
   description: String!
   profilePic: String!
   coverPic: String!
-  user: User!
+  seller: Seller!
 }
 
 type Product {
@@ -85,7 +96,8 @@ type Admin {
 }
 
 type Query {
-  getAll: Admin!
+  getAll: String!
+  testStore: String!
 }
 
 type Mutation {
@@ -96,6 +108,7 @@ type Mutation {
   superAdminLogout: SuperAdmin!
   CreateAdmin(adminInput: adminInput!): Admin!
   uploadFile(file: [Upload!]!): Boolean!
+  createSeller(sellerInput: sellerInput!): Seller!
 }
 
 input signinInput {
@@ -121,3 +134,13 @@ input adminInput {
 
 """The `Upload` scalar type represents a file upload."""
 scalar Upload
+
+input sellerInput {
+  fullName: String!
+  email: String!
+  password: String!
+  hash: String!
+  status: String!
+  fiscale: String!
+  role: String!
+}
