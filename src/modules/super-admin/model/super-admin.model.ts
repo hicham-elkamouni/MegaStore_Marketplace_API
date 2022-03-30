@@ -18,7 +18,11 @@ export class SuperAdmin {
 
   @Field(() => String)
   @Prop({ required: true })
-  hash: string;
+  hashedPassword: string;
+
+  @Field(() => String)
+  @Prop()
+  hashedRt: string;
 
   @Field(() => [String])
   @Prop({ default: ['superAdmin'] })

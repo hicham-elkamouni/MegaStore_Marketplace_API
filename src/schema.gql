@@ -65,14 +65,14 @@ type User {
   name: String!
   profilePic: String!
   email: String!
-  hash: String!
-  hashRerf: String!
+  hashedPassword: String!
+  hashedRt: String!
   phone: String!
   address: String!
   city: String!
   country: String!
   document: String!
-  permissions: [String!]!
+  roles: [String!]!
   cart: Cart!
   store: Store!
   orders: [Order!]!
@@ -82,7 +82,8 @@ type SuperAdmin {
   _id: String!
   fullName: String!
   email: String!
-  hash: String!
+  hashedPassword: String!
+  hashedRt: String!
   permissions: [String!]!
 }
 
@@ -90,33 +91,37 @@ type Admin {
   _id: String!
   fullName: String!
   email: String!
-  hash: String!
-  hashRef: String!
-  permissions: [String!]!
+  hashedPassword: String!
+  hashedRt: String!
+  roles: [String!]!
 }
 
 type Query {
   getAll: String!
+  getAllAdmins: [Admin!]!
+  getAdminById(id: String!): Admin!
   testStore: String!
 }
 
 type Mutation {
-  signIn(signinInput: signinInput!): Auth!
-  signUp(signupInput: signupInput!): Auth!
-  logOut: User!
-  superAdminLogin(signinInput: signinInput!): Auth!
+  signIn(signInInput: signInInput!): Auth!
+  signUp(signUpInput: signUpInput!): Auth!
+  logOut: Boolean!
+  superAdminLogin(signInInput: signInInput!): Auth!
   superAdminLogout: SuperAdmin!
-  CreateAdmin(adminInput: adminInput!): Admin!
-  uploadFile(file: [Upload!]!): Boolean!
+  CreateAdmin(createAdminInput: CreateAdminInput!): Admin!
+  UpdateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
+  DeleteAdmin(id: String!): Admin!
+  adminLogin(signinInput: signInInput!): Auth!
   createSeller(sellerInput: sellerInput!): Seller!
 }
 
-input signinInput {
+input signInInput {
   email: String!
   password: String!
 }
 
-input signupInput {
+input signUpInput {
   name: String!
   email: String!
   password: String!
@@ -126,14 +131,18 @@ input signupInput {
   address: String!
 }
 
-input adminInput {
+input CreateAdminInput {
   fullName: String!
   email: String!
   password: String!
 }
 
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
+input UpdateAdminInput {
+  id: String!
+  fullName: String
+  email: String
+  password: String
+}
 
 input sellerInput {
   fullName: String!
