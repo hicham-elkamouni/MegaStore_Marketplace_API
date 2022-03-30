@@ -114,6 +114,7 @@ type Mutation {
   CreateAdmin(createAdminInput: CreateAdminInput!): Admin!
   UpdateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
   DeleteAdmin(id: String!): Admin!
+  handleRequestSeller(id: String!): User!
   adminLogin(signinInput: signInInput!): Auth!
   createSeller(sellerInput: sellerInput!): Seller!
 }
