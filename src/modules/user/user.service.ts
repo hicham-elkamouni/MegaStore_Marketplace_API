@@ -2,7 +2,7 @@ import { Injectable, applyDecorators } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './model/user.model';
 import { Model } from 'mongoose';
-import { SellerRequestInput, signUpInput } from './dto';
+import { SellerAccountStatusInput, SellerRequestInput, signUpInput } from './dto';
 import { signInInput } from '../auth/dto/signin.input';
 import { Auth } from '../auth/model/auth.model';
 
@@ -151,6 +151,14 @@ export class UserService {
       user.request = 'rejected';
     }
 
+    await user.save();
+    return user;
+  }
+
+  async sellerAccountStatus(data: SellerAccountStatusInput): Promise<User> {
+    const user = await this.userModel.findById(data.userId);
+    if (!user) throw new ApolloError('user not found');
+    user.sellerStatus = data.sellerStatus;
     await user.save();
     return user;
   }
