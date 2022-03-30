@@ -2,6 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Document , Schema as MongooseSchema } from 'mongoose';
 
+@ObjectType()
+@Schema({ timestamps: true })
 export class ShippingCompany {
 
     @Field()
@@ -20,3 +22,7 @@ export class ShippingCompany {
     @Prop({ enum : ['Standard', 'Express']})
     type: string;
 }
+
+export type ShippingCompanyDocument = ShippingCompany & Document;
+
+export const ShippingCompanySchema = SchemaFactory.createForClass(ShippingCompany);
