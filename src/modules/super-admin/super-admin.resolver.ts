@@ -9,6 +9,7 @@ import { CreateAdminInput, UpdateAdminInput } from '../admin/dto';
 import { AdminService } from '../admin/admin.service';
 import { UserService } from '../user/user.service';
 import { User } from '../user/model/user.model';
+import { SellerRequestInput } from '../user/dto';
 
 @Resolver('SuperAdmin')
 export class SuperAdminResolver {
@@ -63,8 +64,8 @@ export class SuperAdminResolver {
     return this.adminService.delete(id);
   }
 
-  @Mutation(() => User, { name: 'handleRequestSeller' })
-  async handleRequestSeller(@Args('id') id: string): Promise<User> {
-    return this.userService.handleRequestSeller(id)
+  @Mutation(() => User, { name: 'handleSellerRequest' })
+  async handleSellerRequest(@Args('sellerRequestInput') data: SellerRequestInput): Promise<User> {
+    return this.userService.handleSellerRequest(data)
   }
 }
