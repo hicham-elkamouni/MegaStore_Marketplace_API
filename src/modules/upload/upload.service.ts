@@ -21,6 +21,7 @@ export class UploadService {
   //     }),
   //   );
 
+
   //   return x.every((e) => e == true);
   // }
 
