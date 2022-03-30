@@ -9,7 +9,6 @@ import { Admin, AdminSchema } from './model/admin.model';
     MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }]),
   ],
   providers: [AdminService, AdminResolver],
-  exports: [AdminService]
+  exports: [AdminService],
 })
 export class AdminModule {}
-

@@ -4,7 +4,7 @@ import { SuperAdmin, SuperAdminDocument } from './model/super-admin.model';
 import { Model } from 'mongoose';
 import { AuthService } from '../auth/auth.service';
 import { Auth } from '../auth/model/auth.model';
-import { signinInput } from '../auth/dto/signin.input';
+import { signInInput } from '../auth/dto/signin.input';
 import { ApolloError } from 'apollo-server-express';
 import * as argon from 'argon2';
 @Injectable()
@@ -22,16 +22,16 @@ export class SuperAdminService {
    * @memberof UsersService
    */
 
-  async signIn(signinInput: signinInput): Promise<Auth> {
+  async signIn(signInInput: signInInput): Promise<Auth> {
     try {
-      const { email, password } = signinInput;
+      const { email, password } = signInInput;
 
       // check the email provided
       const doc = await this.superAdminModel.findOne({ email });
       if (!doc) throw new ApolloError('Email not found');
 
       // check the password
-      const passwordMatches = await argon.verify(doc.hash, password);
+      const passwordMatches = await argon.verify(doc.hashedPassword, password);
       if (!passwordMatches) throw new ApolloError('password not correct');
 
       // create an access and a refresh token
@@ -55,7 +55,7 @@ export class SuperAdminService {
     //register the refresh token in DB
     const updated = await this.superAdminModel.findOneAndUpdate(
       { _id: userId },
-      { hashRef },
+      { hashedRt: hashRef },
       { new: true },
     );
     return updated;

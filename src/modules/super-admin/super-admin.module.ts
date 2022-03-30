@@ -9,7 +9,7 @@ import { AdminModule } from '../admin/admin.module';
     MongooseModule.forFeature([
       { name: SuperAdmin.name, schema: SuperAdminSchema },
     ]),
-    AdminModule
+    AdminModule,
   ],
   providers: [SuperAdminService, SuperAdminResolver],
 })

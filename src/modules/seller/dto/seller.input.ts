@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
-export class adminInput {
+export class sellerInput {
     @Field()
     @IsString()
     @IsNotEmpty()
@@ -16,5 +16,25 @@ export class adminInput {
     @IsString()
     @IsNotEmpty()
     password: string;
+
+    @Field()
+    @IsString()
+    @IsNotEmpty()
+    hash: string;
+
+    @Field()
+    @IsString()
+    @IsNotEmpty()
+    status: string;
+
+    @Field()
+    @IsString()
+    @IsNotEmpty()
+    fiscale: string;
+
+    @Field()
+    @IsString()
+    @IsNotEmpty()
+    role: string;
 
 }

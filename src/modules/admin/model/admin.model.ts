@@ -18,15 +18,15 @@ export class Admin {
 
   @Field(() => String)
   @Prop({ required: true })
-  hash: string;
+  hashedPassword: string;
 
   @Field(() => String)
   @Prop()
-  hashRef: string;
+  hashedRt: string;
 
-  @Field(()=> [String])
-  @Prop({ default : ['admin']})
-  permissions: string[];
+  @Field(() => [String])
+  @Prop({ default: ['admin'] })
+  roles: string[];
 }
 
 export type AdminDocument = Admin & Document;

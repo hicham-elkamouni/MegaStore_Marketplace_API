@@ -12,6 +12,8 @@ import { OrderModule } from '../order/order.module';
 import { SuperAdminModule } from '../super-admin/super-admin.module';
 import { AdminModule } from '../admin/admin.module';
 import { UploadModule } from '../upload/upload.module';
+import { SellerModule } from '../seller/seller.module';
+import { StoreModule } from '../store/store.module';
 
 @Module({
   imports: [
@@ -38,6 +40,8 @@ import { UploadModule } from '../upload/upload.module';
     SuperAdminModule,
     AdminModule,
     UploadModule,
+    SellerModule,
+    StoreModule
   ],
 })
 export class AppModule {}
