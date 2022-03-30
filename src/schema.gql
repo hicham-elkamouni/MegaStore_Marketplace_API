@@ -18,13 +18,24 @@ type Category {
   parent: String
 }
 
+type Seller {
+  _id: String!
+  fullName: String!
+  email: String!
+  role: String!
+  status: String!
+  fiscale: String!
+  hash: String!
+  qtore: Store!
+}
+
 type Store {
   _id: String!
   name: String!
   description: String!
   profilePic: String!
   coverPic: String!
-  user: User!
+  seller: Seller!
 }
 
 type Product {
@@ -86,9 +97,10 @@ type Admin {
 }
 
 type Query {
-  getAll: Admin!
+  getAll: String!
   getAllAdmins: [Admin!]!
   getAdminById(id: String!): Admin!
+  testStore: String!
 }
 
 type Mutation {
@@ -102,6 +114,7 @@ type Mutation {
   DeleteAdmin(id: String!): Admin!
   handleRequestSeller(id: String!): User!
   adminLogin(signinInput: signInInput!): Auth!
+  createSeller(sellerInput: sellerInput!): Seller!
 }
 
 input signInInput {
@@ -130,4 +143,14 @@ input UpdateAdminInput {
   fullName: String
   email: String
   password: String
+}
+
+input sellerInput {
+  fullName: String!
+  email: String!
+  password: String!
+  hash: String!
+  status: String!
+  fiscale: String!
+  role: String!
 }
