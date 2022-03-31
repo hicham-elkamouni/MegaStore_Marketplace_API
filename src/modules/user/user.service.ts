@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, applyDecorators } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './model/user.model';
 import { Model } from 'mongoose';
-import { signUpInput } from './dto';
+import { SellerAccountStatusInput, SellerRequestInput, signUpInput } from './dto';
 import { signInInput } from '../auth/dto/signin.input';
 import { Auth } from '../auth/model/auth.model';
 
@@ -137,16 +137,30 @@ export class UserService {
     }
   }
 
-  async handleRequestSeller(userId: string): Promise<User> {
-    const user = await this.userModel.findById(userId);
+  async handleSellerRequest(data: SellerRequestInput): Promise<User> {
+    const user = await this.userModel.findById(data.userId);
     if (!user) throw new ApolloError('user not found');
-    user.roles.push('seller');
-    const updated = await this.userModel.findOneAndUpdate(
-      { _id: userId },
-      { roles: user.roles },
-      { new: true },
-    );
-    return updated;
+
+    if (data.request == "accepted") {
+      user.roles.push('seller');
+      user.request = 'accepted';
+      user.sellerStatus = "active";
+    }
+
+    if (data.request == "rejected") {
+      user.request = 'rejected';
+    }
+
+    await user.save();
+    return user;
+  }
+
+  async sellerAccountStatus(data: SellerAccountStatusInput): Promise<User> {
+    const user = await this.userModel.findById(data.userId);
+    if (!user) throw new ApolloError('user not found');
+    user.sellerStatus = data.sellerStatus;
+    await user.save();
+    return user;
   }
 
 }
