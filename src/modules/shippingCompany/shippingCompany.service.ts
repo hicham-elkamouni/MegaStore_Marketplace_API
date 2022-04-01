@@ -16,7 +16,7 @@ export class ShippingCompanyService {
     try {
         const { name, description, type } = createShippingCompanyInput;
 
-        const doc = await this.shippingCompanyModel.findOne({ name});
+        const doc = await this.shippingCompanyModel.findOne({ name , type});
         if (doc) throw new ApolloError('ShippingCompany already exists');
 
         const shippingCompany = await this.shippingCompanyModel.create({ name, description, type });

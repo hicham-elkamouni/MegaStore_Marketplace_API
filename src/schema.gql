@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ShippingCompany {
+  _id: String!
+  name: String!
+  description: String!
+  type: String!
+}
+
 type Auth {
   userId: String!
   token: String!
@@ -103,6 +110,7 @@ type Query {
   getAllAdmins: [Admin!]!
   getAdminById(id: String!): Admin!
   testStore: String!
+  getAllShippingCompanies: ShippingCompany!
 }
 
 type Mutation {
@@ -118,6 +126,7 @@ type Mutation {
   SellerAccountStatus(SellerAccountStatusInput: SellerAccountStatusInput!): User!
   adminLogin(signinInput: signInInput!): Auth!
   createSeller(sellerInput: sellerInput!): Seller!
+  createShippingCompany(createShippingCompanyInput: CreateShippingCompanyInput!): ShippingCompany!
 }
 
 input signInInput {
@@ -166,4 +175,10 @@ input sellerInput {
   status: String!
   fiscale: String!
   role: String!
+}
+
+input CreateShippingCompanyInput {
+  name: String!
+  description: String!
+  type: String!
 }

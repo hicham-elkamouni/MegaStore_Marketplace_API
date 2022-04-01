@@ -1,3 +1,4 @@
+import { ShippingCompanyModule } from './../shippingCompany/shippingCompany.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -41,7 +42,8 @@ import { StoreModule } from '../store/store.module';
     AdminModule,
     UploadModule,
     SellerModule,
-    StoreModule
+    StoreModule,
+    ShippingCompanyModule
   ],
 })
 export class AppModule {}

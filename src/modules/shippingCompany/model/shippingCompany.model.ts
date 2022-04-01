@@ -6,8 +6,7 @@ import { Document , Schema as MongooseSchema } from 'mongoose';
 @Schema({ timestamps: true })
 export class ShippingCompany {
 
-    @Field()
-    @Prop({ required: true })
+    @Field(() => String)
     _id: MongooseSchema.Types.ObjectId;
     
     @Field(() => String)
