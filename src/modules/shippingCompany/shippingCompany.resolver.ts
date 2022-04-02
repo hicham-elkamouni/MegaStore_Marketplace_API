@@ -1,3 +1,4 @@
+import { UpdateShippingCompanyInput } from './dto/updateShippingCompany.input';
 import { CreateShippingCompanyInput } from './dto/createShippingCompany.input';
 import { Args, Mutation, Query , Resolver } from "@nestjs/graphql";
 import { ShippingCompany } from "./model/shippingCompany.model";
@@ -13,9 +14,13 @@ export class ShippingCompanyResolver {
     }
 
     @Mutation(() => ShippingCompany, { name : 'createShippingCompany' })
-    async CreateShippingCompany(@Args('createShippingCompanyInput') createShippingCompanyInput: CreateShippingCompanyInput) {
+    async createShippingCompany(@Args('createShippingCompanyInput') createShippingCompanyInput: CreateShippingCompanyInput) {
         return this.shippingCompanyService.create(createShippingCompanyInput);
     }
 
-    
+    @Mutation(()=> ShippingCompany, { name : 'updateShippingCompany' })
+    async UpdateShippingCompany(@Args('updateShippingCompanyInput') updateShippingCompanyInput: UpdateShippingCompanyInput) {
+        return this.shippingCompanyService.updateShippingCompany(updateShippingCompanyInput);
+    }
+
 }

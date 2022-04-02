@@ -127,6 +127,7 @@ type Mutation {
   adminLogin(signinInput: signInInput!): Auth!
   createSeller(sellerInput: sellerInput!): Seller!
   createShippingCompany(createShippingCompanyInput: CreateShippingCompanyInput!): ShippingCompany!
+  updateShippingCompany(updateShippingCompanyInput: UpdateShippingCompanyInput!): ShippingCompany!
 }
 
 input signInInput {
@@ -181,4 +182,11 @@ input CreateShippingCompanyInput {
   name: String!
   description: String!
   type: String!
+}
+
+input UpdateShippingCompanyInput {
+  id: String!
+  name: String
+  description: String
+  type: String
 }

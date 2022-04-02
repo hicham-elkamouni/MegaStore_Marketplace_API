@@ -100,7 +100,7 @@ export class AdminService {
       const doc = await this.adminModel.findOne({ _id: id });
       if (!doc) throw new ApolloError('user not found');
 
-      // hashe the password
+      // hash the password
       if (password) {
         const hashedPassword = await argon.hash(password);
         doc.hashedPassword = hashedPassword;

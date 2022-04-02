@@ -1,3 +1,4 @@
+import { UpdateShippingCompanyInput } from './dto/updateShippingCompany.input';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ShippingCompany ,ShippingCompanyDocument } from './model/shippingCompany.model';
@@ -39,5 +40,23 @@ export class ShippingCompanyService {
     }
   }
 
+  async updateShippingCompany( updateShippingCompanyInput : UpdateShippingCompanyInput): Promise<ShippingCompany> {
+    try {
+
+        const { id, ...restFields } = updateShippingCompanyInput;
+
+        const doc = await this.shippingCompanyModel.findOne({ id });
+        console.log(doc)
+        if (!doc) throw new ApolloError('shipping company doesnt exist');
+
+        const shippingCompany = await this.shippingCompanyModel.findByIdAndUpdate(id, { ...restFields }, { new: true });
+        console.log("this is shipping company",shippingCompany)
+
+        if(!shippingCompany) throw new ApolloError('ShippingCompany not updated');
+        return shippingCompany;
+    }catch(error) {
+        return error;
+    }
+  }
 }
 
