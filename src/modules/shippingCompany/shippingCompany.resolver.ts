@@ -16,4 +16,6 @@ export class ShippingCompanyResolver {
     async CreateShippingCompany(@Args('createShippingCompanyInput') createShippingCompanyInput: CreateShippingCompanyInput) {
         return this.shippingCompanyService.create(createShippingCompanyInput);
     }
+
+    
 }
