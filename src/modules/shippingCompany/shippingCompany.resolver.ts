@@ -7,9 +7,9 @@ import { ShippingCompanyService } from "./shippingCompany.service";
 export class ShippingCompanyResolver {
     constructor(private shippingCompanyService: ShippingCompanyService) {}
 
-    @Query(() => ShippingCompany, { name : 'getAllShippingCompanies' })
-    async getAll() {
-        return 'getting all shipping companies';
+    @Query(() => [ShippingCompany], { name : 'getAllShippingCompanies' })
+    async getAll(): Promise<ShippingCompany[]> {
+        return this.shippingCompanyService.getAll();
     }
 
     @Mutation(() => ShippingCompany, { name : 'createShippingCompany' })

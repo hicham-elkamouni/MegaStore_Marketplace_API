@@ -110,7 +110,7 @@ type Query {
   getAllAdmins: [Admin!]!
   getAdminById(id: String!): Admin!
   testStore: String!
-  getAllShippingCompanies: ShippingCompany!
+  getAllShippingCompanies: [ShippingCompany!]!
 }
 
 type Mutation {

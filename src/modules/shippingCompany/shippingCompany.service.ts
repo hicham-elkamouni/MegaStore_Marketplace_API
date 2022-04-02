@@ -12,6 +12,17 @@ export class ShippingCompanyService {
       private shippingCompanyModel: Model<ShippingCompanyDocument>,
   ) { }
   
+  async getAll(): Promise<ShippingCompany[]> {
+    try {
+        const shippingCompanies = await this.shippingCompanyModel.find();
+        console.log(shippingCompanies);
+        if(!shippingCompanies) throw new ApolloError('ShippingCompanies not found');
+        return shippingCompanies;
+    }catch(error) {
+        return error;
+    }
+  }
+
   async create(createShippingCompanyInput : CreateShippingCompanyInput): Promise<ShippingCompany> {
     try {
         const { name, description, type } = createShippingCompanyInput;
@@ -27,5 +38,6 @@ export class ShippingCompanyService {
         return error;
     }
   }
+
 }
 
