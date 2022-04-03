@@ -58,5 +58,15 @@ export class ShippingCompanyService {
         return error;
     }
   }
+
+  async getShippingCompanyById(id: string): Promise<ShippingCompany> {
+    try {
+        const shippingCompany = await this.shippingCompanyModel.findById(id);
+        if(!shippingCompany) throw new ApolloError('ShippingCompany not found');
+        return shippingCompany;
+    }catch(error) {
+        return error;
+    }
+  }
 }
 

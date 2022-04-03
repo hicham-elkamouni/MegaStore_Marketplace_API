@@ -13,13 +13,18 @@ export class ShippingCompanyResolver {
         return this.shippingCompanyService.getAll();
     }
 
+    @Query(() => ShippingCompany, { name : 'getShippingCompanyById' })
+    async getShippingCompanyById(@Args('id') id: string) {
+        return this.shippingCompanyService.getShippingCompanyById(id);
+    }
+
     @Mutation(() => ShippingCompany, { name : 'createShippingCompany' })
     async createShippingCompany(@Args('createShippingCompanyInput') createShippingCompanyInput: CreateShippingCompanyInput) {
         return this.shippingCompanyService.create(createShippingCompanyInput);
     }
 
     @Mutation(()=> ShippingCompany, { name : 'updateShippingCompany' })
-    async UpdateShippingCompany(@Args('updateShippingCompanyInput') updateShippingCompanyInput: UpdateShippingCompanyInput) {
+    async updateShippingCompany(@Args('updateShippingCompanyInput') updateShippingCompanyInput: UpdateShippingCompanyInput) {
         return this.shippingCompanyService.updateShippingCompany(updateShippingCompanyInput);
     }
 
