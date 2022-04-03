@@ -68,5 +68,17 @@ export class ShippingCompanyService {
         return error;
     }
   }
+
+  async deleteShippingCompany(id: string): Promise<ShippingCompany> {
+    try {
+        const shippingCompany = await this.shippingCompanyModel.findOne({ _id : id});
+        if(!shippingCompany) throw new ApolloError('ShippingCompany not found');
+        const deletedShippingCompany = await this.shippingCompanyModel.findByIdAndDelete(id);
+        if(!deletedShippingCompany) throw new ApolloError('ShippingCompany not deleted');
+        return deletedShippingCompany;
+    }catch(error) {
+        return error;
+    }
+  }
 }
 

@@ -28,4 +28,9 @@ export class ShippingCompanyResolver {
         return this.shippingCompanyService.updateShippingCompany(updateShippingCompanyInput);
     }
 
+    @Mutation(()=> ShippingCompany, { name : 'deleteShippingCompany' })
+    async deleteShippingCompany(@Args('id') id: string) {
+        return this.shippingCompanyService.deleteShippingCompany(id);
+    }
+
 }

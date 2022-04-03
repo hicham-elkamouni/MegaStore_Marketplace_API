@@ -129,6 +129,7 @@ type Mutation {
   createSeller(sellerInput: sellerInput!): Seller!
   createShippingCompany(createShippingCompanyInput: CreateShippingCompanyInput!): ShippingCompany!
   updateShippingCompany(updateShippingCompanyInput: UpdateShippingCompanyInput!): ShippingCompany!
+  deleteShippingCompany(id: String!): ShippingCompany!
 }
 
 input signInInput {
