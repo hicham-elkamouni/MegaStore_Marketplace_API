@@ -2,7 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 @InputType()
-export class signUpInput {
+export  class sellerInput {
 
   @Field()
   @IsString()
@@ -13,6 +13,8 @@ export class signUpInput {
   @IsString()
   @IsNotEmpty()
   profilePic?: string;
+
+
 
   @Field({nullable:true})
   @IsString()
@@ -27,12 +29,6 @@ export class signUpInput {
   @IsString()
   @IsNotEmpty()
   password: string;
-
-  @Field()
-  @IsString()
-  @IsNotEmpty()
-  storeName: string;
-
 
 
   @Field()
@@ -54,4 +50,9 @@ export class signUpInput {
   @IsString()
   @IsNotEmpty()
   address: string;
+
+  @Field()
+  @IsString()
+  @IsNotEmpty()
+  storeName: string;
 }

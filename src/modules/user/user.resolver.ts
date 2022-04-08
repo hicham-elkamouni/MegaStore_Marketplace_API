@@ -1,10 +1,12 @@
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { Allowed } from '../auth/guards/Allowed.guard';
 import { signUpInput } from './dto';
+import { sellerInput } from './dto';
 import { signInInput } from '../auth/dto/signin.input';
 import { Auth } from '../auth/model/auth.model';
 import { User } from './model/user.model';
 import { UserService } from './user.service';
+import console from 'console';
 
 @Resolver('User')
 export class userResolver {
@@ -31,4 +33,11 @@ export class userResolver {
     const userId = req.user?.userId;
     return this.userService.logOut(userId);
   }
+
+  @Mutation(() => User, { name: 'createSeller' })
+  async createSeller(@Args('sellerInput') signUpInput: sellerInput): Promise<User> {
+    
+    return this.userService.createSeller(signUpInput);
+  }
+
 }

@@ -25,13 +25,14 @@ type Seller {
   role: String!
   status: String!
   fiscale: String!
-  hash: String!
-  qtore: Store!
+  hashedPassword: String!
+  hashedRt: String!
+  store: Store!
 }
 
 type Store {
   _id: String!
-  name: String!
+  storeName: String!
   description: String!
   profilePic: String!
   coverPic: String!
@@ -72,19 +73,12 @@ type User {
   city: String!
   country: String!
   document: String!
+  request: String!
+  sellerStatus: String!
   roles: [String!]!
   cart: Cart!
   store: Store!
   orders: [Order!]!
-}
-
-type SuperAdmin {
-  _id: String!
-  fullName: String!
-  email: String!
-  hashedPassword: String!
-  hashedRt: String!
-  permissions: [String!]!
 }
 
 type Admin {
@@ -96,24 +90,33 @@ type Admin {
   roles: [String!]!
 }
 
+type SuperAdmin {
+  _id: String!
+  fullName: String!
+  email: String!
+  hashedPassword: String!
+  hashedRt: String!
+  permissions: [String!]!
+}
+
 type Query {
-  getAll: String!
+  getAll: Order!
+  testStore: String!
   getAllAdmins: [Admin!]!
   getAdminById(id: String!): Admin!
-  testStore: String!
 }
 
 type Mutation {
   signIn(signInInput: signInInput!): Auth!
   signUp(signUpInput: signUpInput!): Auth!
   logOut: Boolean!
+  createSeller(sellerInput: sellerInput!): User!
+  adminLogin(signinInput: signInInput!): Auth!
   superAdminLogin(signInInput: signInInput!): Auth!
   superAdminLogout: SuperAdmin!
   CreateAdmin(createAdminInput: CreateAdminInput!): Admin!
   UpdateAdmin(updateAdminInput: UpdateAdminInput!): Admin!
   DeleteAdmin(id: String!): Admin!
-  adminLogin(signinInput: signInInput!): Auth!
-  createSeller(sellerInput: sellerInput!): Seller!
 }
 
 input signInInput {
@@ -123,12 +126,28 @@ input signInInput {
 
 input signUpInput {
   name: String!
+  profilePic: String
+  document: String
+  email: String!
+  password: String!
+  storeName: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
+}
+
+input sellerInput {
+  name: String!
+  profilePic: String
+  document: String
   email: String!
   password: String!
   phone: String!
   country: String!
   city: String!
   address: String!
+  storeName: String!
 }
 
 input CreateAdminInput {
@@ -142,14 +161,4 @@ input UpdateAdminInput {
   fullName: String
   email: String
   password: String
-}
-
-input sellerInput {
-  fullName: String!
-  email: String!
-  password: String!
-  hash: String!
-  status: String!
-  fiscale: String!
-  role: String!
 }

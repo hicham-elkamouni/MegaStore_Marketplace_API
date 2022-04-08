@@ -9,6 +9,8 @@ import { Auth } from '../auth/model/auth.model';
 import { ApolloError } from 'apollo-server-express';
 import * as argon from 'argon2';
 import { AuthService } from '../auth/auth.service';
+import { Store } from '../store/model/store.model';
+import { StoreService } from '../store/store.service';
 
 @Injectable()
 export class UserService {
@@ -16,6 +18,7 @@ export class UserService {
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
     private authService: AuthService,
+    private storeService: StoreService,
   ) {}
 
   /**
@@ -130,10 +133,62 @@ export class UserService {
       ]);
       // register the refresh token in the DB
       await this.updateRtHash(createdUser._id, refresh_token);
-
+      
       return { userId: createdUser._id, token: access_token };
     } catch (error) {
       return error;
     }
   }
+
+  async createSeller(sellerInput: signUpInput): Promise<any> {
+    try {
+
+      const  {password,email} = sellerInput;
+
+      // check the email provided
+
+      const user = await this.userModel.findOne({ email });
+      if (user) throw new ApolloError('email already exist');
+
+      // hash the user password
+    const hashedPassword = await argon.hash(password);
+    const obj = {...sellerInput , hashedPassword}
+    const createdSeller= await this.userModel.create(obj);
+    if (!createdSeller)
+    throw new ApolloError('failed to create user try again');
+  //create access and refresh
+
+  const [access_token, refresh_token] = await Promise.all([
+    this.authService.createToken(
+      createdSeller._id,
+      createdSeller.roles,
+      '15m',
+      'access',
+    ),
+    this.authService.createToken(
+      createdSeller._id,
+      createdSeller.roles,
+      '7d',
+      'refresh',
+    ),
+  ]);
+
+  await this.updateRtHash(createdSeller._id, refresh_token);
+
+  const objetStore={
+    seller:createdSeller._id, 
+    storeName:sellerInput.storeName
+    };
+
+    const store= await  this.storeService.createStore(objetStore);
+    console.log(store);
+
+  return { userId: createdSeller._id, token: access_token };
+        
+    } catch (error) {
+      return error;
+    }
+  }
+
+
 }

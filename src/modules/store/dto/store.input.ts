@@ -8,24 +8,24 @@ export class storeInput {
    
   
     @Field(() => String)
-    @Prop({  unique: true })
-    name: string;
+    @Prop({required: true})
+    storeName: string;
   
     @Field(() => String)
     @Prop()
-    description: string;
+    description?: string;
   
     @Field(() => String)
     @Prop()
-    profilePic: string;
+    profilePic?: string;
   
     @Field(() => String)
     @Prop()
-    coverPic: string;
+    coverPic?: string;
 
     @Field(() => String)
     @Prop()
-    user: string;
+    seller: string;
   
 
 }

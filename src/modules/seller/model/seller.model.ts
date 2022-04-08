@@ -33,11 +33,16 @@ export class Seller {
 
   @Field(() => String)
   @Prop({ required: true })
-  hash: string;
+  hashedPassword: string;
+
+  
+  @Field(() => String)
+  @Prop()
+  hashedRt: string;
 
   @Field(() => Store)
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Store' }] })
-  qtore: Store;
+  store: Store;
 
 
 }

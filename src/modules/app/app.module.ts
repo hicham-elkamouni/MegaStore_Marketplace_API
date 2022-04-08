@@ -40,7 +40,7 @@ import { StoreModule } from '../store/store.module';
     SuperAdminModule,
     AdminModule,
     UploadModule,
-    SellerModule,
+    // SellerModule,
     StoreModule
   ],
 })

@@ -53,15 +53,15 @@ export class User {
   document: string;
 
   @Field(() => String)
-  @Prop({enum:['pending , accepted , rejected ']})
+  @Prop({enum:['pending','accepted', 'rejected'],default:'pending'})
   request : string; 
 
   @Field(() => String)
-  @Prop({enum:['disabled , inactive']})
+  @Prop({enum:['active' , 'inactive'],default:'inactive'})
   sellerStatus : string; 
 
   @Field(() => [String])
-  @Prop({ default: ['customer'] })
+  @Prop({ default: 'customer' })
   roles: string[];
 
   @Field(() => Cart)

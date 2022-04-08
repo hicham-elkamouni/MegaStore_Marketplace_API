@@ -28,7 +28,7 @@ export class SellerService {
     try {
     //  create a new seller  
     const  {password} = sellerInput;
-    sellerInput.hash = await argon.hash(password);
+    sellerInput.hashedPassword = await argon.hash(password);
       const { _id } = await this.SellerModel.create(sellerInput);
       console.log( _id );
 

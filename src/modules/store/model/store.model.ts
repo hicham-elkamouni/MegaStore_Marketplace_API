@@ -4,15 +4,17 @@ import mongoose from 'mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { Seller } from 'src/modules/seller/model/seller.model';
 
+
 @ObjectType()
 @Schema({ timestamps: true })
 export class Store {
+  
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
-  @Prop({  unique: true })
-  name: string;
+  @Prop()
+  storeName: string;
 
   @Field(() => String)
   @Prop()
@@ -26,11 +28,14 @@ export class Store {
   @Prop()
   coverPic: string;
 
+  
   @Field(() => Seller)
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Seller' }] })
+  @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller' } })
   seller: Seller;
 }
+
 
 export type StoreDocument = Store & Document;
 
 export const StoreSchema = SchemaFactory.createForClass(Store);
+

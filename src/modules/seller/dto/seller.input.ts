@@ -20,7 +20,7 @@ export class sellerInput {
     @Field()
     @IsString()
     @IsNotEmpty()
-    hash: string;
+    hashedPassword: string;
 
     @Field()
     @IsString()

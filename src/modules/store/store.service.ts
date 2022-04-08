@@ -22,10 +22,18 @@ export class StoreService {
    */
    async createStore(storeInput: storeInput): Promise<any> {
     try {
-      console.log(storeInput);
     //  create a new seller    
-   return  await this.StoreModel.create({seller:storeInput});
-       
+  //  return  await this.StoreModel.create(storeInput);
+       const { storeName, description, profilePic, coverPic, seller } = storeInput;
+       const res = await this.StoreModel.create({
+        storeName,
+        description,
+        profilePic,
+        coverPic,
+        seller,
+      });
+      console.log(storeName , description, profilePic, coverPic, seller);
+      return res
     } catch (error) {
       return error;
     }
