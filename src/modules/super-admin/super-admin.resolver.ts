@@ -1,3 +1,4 @@
+import { SellerAccountStatusInput } from './../user/dto/sellerAccountStatus.input';
 import { SuperAdmin } from './model/super-admin.model';
 import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { SuperAdminService } from './super-admin.service';
@@ -7,12 +8,16 @@ import { Allowed } from '../auth/guards/Allowed.guard';
 import { Admin } from '../admin/model/admin.model';
 import { CreateAdminInput, UpdateAdminInput } from '../admin/dto';
 import { AdminService } from '../admin/admin.service';
+import { UserService } from '../user/user.service';
+import { User } from '../user/model/user.model';
+import { SellerRequestInput } from '../user/dto';
 
 @Resolver('SuperAdmin')
 export class SuperAdminResolver {
   constructor(
     private superAdminService: SuperAdminService,
     private adminService: AdminService,
+    private userService: UserService
   ) { }
 
 
@@ -58,5 +63,15 @@ export class SuperAdminResolver {
   @Mutation(() => Admin, { name: 'DeleteAdmin' })
   async deleteAdmin(@Args('id') id: string): Promise<Admin> {
     return this.adminService.delete(id);
+  }
+
+  @Mutation(() => User, { name: 'handleSellerRequest' })
+  async handleSellerRequest(@Args('sellerRequestInput') data: SellerRequestInput): Promise<User> {
+    return this.userService.handleSellerRequest(data)
+  }
+
+  @Mutation(() => User, { name: 'SellerAccountStatus' })
+  async sellerAccountStatus(@Args('SellerAccountStatusInput') data: SellerAccountStatusInput): Promise<User> {
+    return this.userService.sellerAccountStatus(data)
   }
 }

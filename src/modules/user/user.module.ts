@@ -11,5 +11,6 @@ import {StoreModule} from '../store/store.module';
     StoreModule
   ],
   providers: [userResolver, UserService],
+  exports: [UserService]
 })
-export class UserModule {}
+export class UserModule { }

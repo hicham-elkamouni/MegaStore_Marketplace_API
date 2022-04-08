@@ -1,3 +1,4 @@
+import { ShippingCompanyModule } from './../shippingCompany/shippingCompany.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -40,8 +41,14 @@ import { StoreModule } from '../store/store.module';
     SuperAdminModule,
     AdminModule,
     UploadModule,
+<<<<<<< HEAD
     // SellerModule,
     StoreModule
+=======
+    SellerModule,
+    StoreModule,
+    ShippingCompanyModule
+>>>>>>> 53e9009d2fcaf22c3b8a1ffbb8d49a7618d1cc85
   ],
 })
 export class AppModule {}

@@ -53,11 +53,19 @@ export class User {
   document: string;
 
   @Field(() => String)
+<<<<<<< HEAD
   @Prop({enum:['pending','accepted', 'rejected'],default:'pending'})
   request : string; 
 
   @Field(() => String)
   @Prop({enum:['active' , 'inactive'],default:'inactive'})
+=======
+  @Prop({enum:['pending' , 'accepted' , 'rejected']})
+  request : string; 
+
+  @Field(() => String)
+  @Prop({enum:['disabled' , 'active']})
+>>>>>>> 53e9009d2fcaf22c3b8a1ffbb8d49a7618d1cc85
   sellerStatus : string; 
 
   @Field(() => [String])
