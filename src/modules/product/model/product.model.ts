@@ -27,21 +27,19 @@ export class Product {
   @Prop({ required: true })
   price: number;
 
-  @Field(() => String)
-  @Prop({ required: true })
-  status: string;
+  
 
-  @Field(() => Category)
-  @Prop({ required: true })
-  category: Category;
+  // @Field(() => String)
+  // @Prop({ required: true })
+  // status: string;
 
-  @Field(() => Brand)
-  @Prop({ required: true })
-  brand: Brand;
+  // @Field(() => Category)
+  // @Prop({ required: true })
+  // category: Category;
 
-  @Field(() => Store)
-  @Prop({ required: true })
-  store: Store;
+  // @Field(() => Store)
+  // @Prop({ required: true })
+  // store: Store;
 }
 
 export type ProductDocument = Product & Document;

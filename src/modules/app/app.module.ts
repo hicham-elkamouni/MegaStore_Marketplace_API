@@ -15,6 +15,9 @@ import { AdminModule } from '../admin/admin.module';
 import { UploadModule } from '../upload/upload.module';
 import { SellerModule } from '../seller/seller.module';
 import { StoreModule } from '../store/store.module';
+import { MediaController } from './app.controller';
+import { FirebaseModule } from '../firebase/firebase.module';
+import { ProductModule } from '../product/product.module';
 
 @Module({
   imports: [
@@ -41,14 +44,12 @@ import { StoreModule } from '../store/store.module';
     SuperAdminModule,
     AdminModule,
     UploadModule,
-<<<<<<< HEAD
-    // SellerModule,
-    StoreModule
-=======
     SellerModule,
     StoreModule,
-    ShippingCompanyModule
->>>>>>> 53e9009d2fcaf22c3b8a1ffbb8d49a7618d1cc85
+    ShippingCompanyModule,
+    FirebaseModule,
+    ProductModule
   ],
+  controllers:[MediaController]
 })
 export class AppModule {}
